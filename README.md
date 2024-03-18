@@ -15,7 +15,7 @@ You can initialize the editor with this plugin like this:
 ```
 tinymce.init({
   selector: "textarea.tinymce",
-  plugins: "code image unsplash-unofficial",
+  plugins: "image unsplash-unofficial",
   toolbar: "unsplash-unofficial",
   setup: (editor) => {
     editor.options.register("imageSearchURL", {
@@ -25,6 +25,9 @@ tinymce.init({
   },
 });
 ```
+Note that the 'image' plugin is required. 
+
+### Image URL
 
 If this is for personal/internal use, the image URL should be "https://api.unsplash.com/search/photos?client_id={{YOUR_CLIENT_ID}}".
 
