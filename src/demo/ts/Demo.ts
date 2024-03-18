@@ -2,7 +2,7 @@ import { TinyMCE } from "tinymce";
 
 import Plugin from "../../main/ts/Plugin";
 
-import { unsplash_api_key } from "../../config";
+import { image_search_url } from "../../config";
 
 declare let tinymce: TinyMCE;
 
@@ -13,9 +13,9 @@ tinymce.init({
   plugins: "code image unsplash-unofficial",
   toolbar: "unsplash-unofficial",
   setup: (editor) => {
-    editor.options.register("unsplash_api_key", {
+    editor.options.register("imageSearchURL", {
       processor: "string",
-      default: unsplash_api_key,
+      default: image_search_url,
     });
   },
 });

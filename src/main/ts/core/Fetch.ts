@@ -1,19 +1,24 @@
 export const fetchImages = (
   search: string,
   orientation: string,
-  unsplash_api_key: string
-) => {
-  let url = `https://api.unsplash.com/search/photos?page=1&query=${search}
-&client_id=${unsplash_api_key}&per_page=10`;
+  page: Number,
+  per_page: Number,
+  imageSearchURL: string
+): any => {
+  let url = new URL(imageSearchURL);
+  let params = url.searchParams;
+  params.append("query", search);
+  params.append("page", page.toString());
+  params.append("per_page", per_page.toString());
+
+  url.search = params.toString();
 
   if (orientation == "portrait" || orientation == "landscape") {
-    url += `&orientation=${orientation}`;
+    params.append("orientation", orientation);
   }
 
-  console.log(url);
-
   return new Promise((resolve, reject) => {
-    fetch(url)
+    fetch(url.href)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

@@ -4,15 +4,12 @@ import { fetchImages } from "./core/Fetch";
 
 declare const tinymce: TinyMCE;
 
-const setup = (editor: Editor, url: string): void => {
-  const unsplash_api_key = tinymce.activeEditor.options.get("unsplash_api_key");
+const setup = (editor: Editor): void => {
+  const imageSearchURL = tinymce.activeEditor.options.get("imageSearchURL");
 
   const handleImageClick = (src) => {
-    console.log("going to close");
     tinymce.activeEditor.windowManager.close();
-    console.log("should be closed now");
     tinymce.activeEditor.execCommand("mceImage");
-    console.log("image uploader should be here");
 
     /* The modal field is not immediately visible. 
   It will fail to find the element without a timeout (hacky solution) */
@@ -36,10 +33,7 @@ const setup = (editor: Editor, url: string): void => {
   If you use click and are focused into a text field that's out of view,
   the callback doesn't happen */
   document.addEventListener("mousedown", (event: any) => {
-    console.log("click");
-    console.log(event.target.classList);
     if (event.target.classList.contains("unsplash-search-img")) {
-      console.log("should respond to click");
       handleImageClick(event.target.src);
     }
   });
@@ -59,7 +53,6 @@ const setup = (editor: Editor, url: string): void => {
     const generateImageGridHTML = () => {
       let imageGridHTML = "";
       imageGridHTML += `<div style = "display: grid; grid-template-columns: 1fr 1fr ">`;
-      //imageGridHTML += "";
       for (let i = 0; i < imageData.length; i++) {
         imageGridHTML += generateImageHTML(imageData[i]);
       }
@@ -111,7 +104,7 @@ const setup = (editor: Editor, url: string): void => {
         const search = api.getData().search;
         const orientation = api.getData().orientation;
         api.close();
-        fetchImages(search, orientation, unsplash_api_key)
+        fetchImages(search, orientation, 1, 10, imageSearchURL)
           .then((imageData) => {
             api.close();
             openImageDialog(imageData);
@@ -159,11 +152,10 @@ const setup = (editor: Editor, url: string): void => {
       onSubmit: (api) => {
         const search = api.getData().search;
         const orientation = api.getData().orientation;
-        fetchImages(search, orientation, unsplash_api_key)
+        fetchImages(search, orientation, 1, 10, imageSearchURL)
           .then((imageData) => {
             api.close();
             openImageDialog(imageData);
-            console.log(imageData);
           })
           .catch((error) => {});
       },
