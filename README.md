@@ -8,7 +8,7 @@ This is an unofficial Unsplash plugin for the TinyMCE editor that allows you to 
 
 ### Creating the Plugin File
 
-To add this plugin to your TinyMCE editor, clone the repo and run `npm build` to create the dist folder. On the pages you're using the plugin, add the `/dist/plugin.min.js` file.
+To add this plugin to your TinyMCE editor, clone the repo and run `npm run build` to create the dist folder. On the pages you're using the plugin, add the `/dist/plugin.min.js` file.
 
 ### Initializing the Editor
 
