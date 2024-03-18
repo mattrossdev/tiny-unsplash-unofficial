@@ -1,12 +1,12 @@
 export const fetchImages = (
   search: string,
   orientation: string,
-  page: Number,
-  per_page: Number,
+  page: number,
+  per_page: number,
   imageSearchURL: string
-): any => {
-  let url = new URL(imageSearchURL);
-  let params = url.searchParams;
+): Promise<Record<string, unknown>> => {
+  const url = new URL(imageSearchURL);
+  const params = url.searchParams;
   params.append("query", search);
   params.append("page", page.toString());
   params.append("per_page", per_page.toString());

@@ -16,15 +16,18 @@ const setup = (editor: Editor): void => {
     setTimeout(function () {
       //This is subject to change/not an ideal selector
       //TODO: Find a better way of targeting this
-      const urlInput: any = document.querySelector(
+      const urlInput = document.querySelector(
         'input[type="url"].tox-textfield'
-      );
+      ) as HTMLInputElement;
 
       if (urlInput) {
         let regular_img_src = src;
         regular_img_src = regular_img_src.replace("&w=400", "&w=1080");
         urlInput.value = regular_img_src;
       } else {
+        console.log(
+          "Error, the URL field for the image uploader could not be found."
+        );
       }
     }, 50);
   };
@@ -32,12 +35,15 @@ const setup = (editor: Editor): void => {
   /* Click event listener doesn't work. 
   If you use click and are focused into a text field that's out of view,
   the callback doesn't happen */
-  document.addEventListener("pointerdown", (event: any) => {
+  document.addEventListener("pointerdown", (event: PointerEvent) => {
     if (
       (event.pointerType === "mouse" && event.which === 1) ||
       (event.pointerType === "touch" && event.isPrimary)
     ) {
-      if (event.target.classList.contains("unsplash-search-img")) {
+      if (
+        event.target instanceof HTMLImageElement &&
+        event.target.classList.contains("unsplash-search-img")
+      ) {
         handleImageClick(event.target.src);
       }
     }
@@ -121,7 +127,7 @@ const setup = (editor: Editor): void => {
     });
   };
 
-  var openSearchDialog = function () {
+  const openSearchDialog = function () {
     return editor.windowManager.open({
       title: "Search Unsplash",
       body: {
