@@ -2,6 +2,8 @@
 
 This is an unofficial Unsplash plugin for the TinyMCE editor that allows you to search images using the Unsplash API and add them to the text editor.
 
+![2024-03-17 19-26-22](https://github.com/mattrossdev/tiny-unsplash-unofficial/assets/13306707/c14e8290-b439-4662-88b3-8b4d37cfb712)
+
 ## Setup
 
 ### Creating the Plugin File
