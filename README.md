@@ -31,4 +31,4 @@ Note that the 'image' plugin is required.
 
 If this is for personal/internal use, the image URL should be "https://api.unsplash.com/search/photos?client_id={{YOUR_CLIENT_ID}}".
 
-For external use you must pass the request through a server/proxy to avoid exposing your Unsplash API credentials. This is required by the [Unsplash API terms of use](https://unsplash.com/api-terms). In that case the image URL would be your server endpoint, which should return the same data you get from the Unsplash request.
+For external use you must pass the request through a server/proxy to avoid exposing your Unsplash API credentials. This is required by the [Unsplash API terms of use](https://unsplash.com/api-terms). In that case the image URL would be your server endpoint, which should pass the request (including parameters) to the Unsplash endpoint, and return the request data unmodified. 
