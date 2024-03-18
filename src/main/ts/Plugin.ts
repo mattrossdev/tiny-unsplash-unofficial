@@ -32,9 +32,14 @@ const setup = (editor: Editor): void => {
   /* Click event listener doesn't work. 
   If you use click and are focused into a text field that's out of view,
   the callback doesn't happen */
-  document.addEventListener("mousedown", (event: any) => {
-    if (event.target.classList.contains("unsplash-search-img")) {
-      handleImageClick(event.target.src);
+  document.addEventListener("pointerdown", (event: any) => {
+    if (
+      (event.pointerType === "mouse" && event.which === 1) ||
+      (event.pointerType === "touch" && event.isPrimary)
+    ) {
+      if (event.target.classList.contains("unsplash-search-img")) {
+        handleImageClick(event.target.src);
+      }
     }
   });
 
@@ -109,7 +114,9 @@ const setup = (editor: Editor): void => {
             api.close();
             openImageDialog(imageData);
           })
-          .catch((error) => {});
+          .catch((error) => {
+            console.error("An error occured: ", error);
+          });
       },
     });
   };
@@ -157,7 +164,9 @@ const setup = (editor: Editor): void => {
             api.close();
             openImageDialog(imageData);
           })
-          .catch((error) => {});
+          .catch((error) => {
+            console.error("An error occured: ", error);
+          });
       },
     });
   };

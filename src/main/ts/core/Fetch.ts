@@ -29,6 +29,7 @@ export const fetchImages = (
         resolve(data.results);
       })
       .catch((error) => {
+        console.error("An error occured: ", error);
         reject(error);
       });
   });
