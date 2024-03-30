@@ -22,6 +22,9 @@ const setup = (editor: Editor): void => {
     });
   };
 
+  //TODO: Look into a better way of keeping this function in scope
+  //TODO: If not, look into a way of addressing the lint error without ignoring
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).handleImageClick = handleImageClick;
 
   const openImageDialog = (imageData) => {
